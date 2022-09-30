@@ -1,54 +1,72 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_app/common/app_button.dart';
-import 'package:flutter_login_app/common/app_input_field.dart';
-import 'package:flutter_login_app/config/app_config.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gap/gap.dart';
+import 'package:flutter_login_app/ui/directory_page/directory_page.dart';
+import 'package:flutter_login_app/ui/home_page/messenger_page.dart';
+import 'package:flutter_login_app/ui/setting_page/setting_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late PageController _controller;
+  int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Messenger',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+      body: PageView(
+        controller: _controller,
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
+          MessengerPage(),
+          DirectoryPage(),
+          SettingPage(),
+        ],
+      ),
+      bottomNavigationBar: _buildBottomNavBar(),
+    );
+  }
+
+  BottomNavigationBar _buildBottomNavBar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Chat',
         ),
-        actions: const [
-          Icon(
-            FontAwesomeIcons.message,
-            color: Colors.black,
-          ),
-          Gap(8),
-          Icon(
-            FontAwesomeIcons.listCheck,
-            color: Colors.black,
-          ),
-          Gap(16),
-        ],
-      ),
-      body: Column(
-        children: [
-          const AppInputField(
-            hintText: 'Search',
-            prefixIcon: Icon(Icons.search),
-          ),
-          AppButton(
-            title: 'Logout',
-            onPressed: () async {
-              final _navigator = Navigator.of(context);
-              await FirebaseAuth.instance.signOut();
-              _navigator.pop();
-            },
-          ),
-        ],
-      ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.business),
+          label: 'Directory',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.school),
+          label: 'Setting',
+        ),
+      ],
+      selectedItemColor: Colors.amber[800],
+      currentIndex: currentIndex,
+      onTap: (index) {
+        setState(() {
+          currentIndex = index;
+        });
+        _controller.jumpToPage(index);
+      },
     );
   }
 }

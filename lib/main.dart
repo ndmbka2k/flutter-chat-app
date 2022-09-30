@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_login_app/ui/chat_page/chat_page.dart';
 import 'package:flutter_login_app/ui/home_page/home_page.dart';
 import 'package:flutter_login_app/ui/sign_in_page/sign_in_page.dart';
 import 'firebase_options.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home' : (context) => const HomePage(),
         'sign_in' : (context) => const LoginPage(),
+        'chat' : (context) => const ChatPage(),
       },
     );
   }

@@ -118,18 +118,21 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
     Future<void> _loginWithGoogle() async {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      //
+      // final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      //
+      // final credential = GoogleAuthProvider.credential(
+      //   accessToken: googleAuth?.accessToken,
+      //   idToken: googleAuth?.idToken,
+      // );
+      //
+      // await FirebaseAuth.instance.signInWithCredential(credential);
+      // if (mounted) {
+      //   Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
+      // }
 
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      if (mounted) {
-        Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
-      }
+      // Only UI:
+      Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
   }
 }
