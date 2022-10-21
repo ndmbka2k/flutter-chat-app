@@ -22,14 +22,14 @@ class UserInfo extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
                 Text('Long NHH'),
                 Text('0234222222')
             ],
           ),
         ),
         const Gap(16),
-        Icon(FontAwesomeIcons.chevronRight)
+        const Icon(FontAwesomeIcons.chevronRight)
       ],
     );
   }

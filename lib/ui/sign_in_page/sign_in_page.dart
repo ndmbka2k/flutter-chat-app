@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_app/common/app_button.dart';
 import 'package:flutter_login_app/common/app_input_field.dart';
-import 'package:flutter_login_app/config/app_config.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -58,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               hintText: 'Password',
               elevation: 5,
               textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) => formFiledSubmitted(),
+              onFieldSubmitted: (_){},
             ),
             const Gap(8),
             const Align(
@@ -68,7 +65,10 @@ class _LoginPageState extends State<LoginPage> {
             const Text('Remember me'),
             SizedBox(
               width: double.infinity,
-              child: AppButton(title: 'Login', onPressed: formFiledSubmitted),
+              child: AppButton(
+                title: 'Login',
+                onPressed: (){},
+              ),
             ),
             const Text('Or'),
             const Text('Sign in with'),
@@ -81,58 +81,63 @@ class _LoginPageState extends State<LoginPage> {
 
   Row _buildLoginIcon() {
     return Row(
-            mainAxisSize: MainAxisSize.min,
-            children:  [
-              const FaIcon(
-                FontAwesomeIcons.facebook,
-                color: Colors.blue,
-              ),
-              const Gap(8),
-              const FaIcon(
-                FontAwesomeIcons.twitter,
-                color: Colors.blue,
-              ),
-              const Gap(8),
-              InkWell(
-                onTap: _loginWithGoogle,
-                child: const FaIcon(
-                  FontAwesomeIcons.googlePlus,
-                  color: Colors.red,
-                ),
-              ),
-            ],
-          );
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const FaIcon(
+          FontAwesomeIcons.facebook,
+          color: Colors.blue,
+        ),
+        const Gap(8),
+        const FaIcon(
+          FontAwesomeIcons.twitter,
+          color: Colors.blue,
+        ),
+        const Gap(8),
+        InkWell(
+          onTap: () {},
+          child: const FaIcon(
+            FontAwesomeIcons.googlePlus,
+            color: Colors.red,
+          ),
+        ),
+      ],
+    );
   }
 
-  void formFiledSubmitted() async {
-    try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      if (mounted) {
-        Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
-      }
-    } catch (e) {
-      showDialog(context: context, builder: (context) => AlertDialog());
-    }
-  }
-    Future<void> _loginWithGoogle() async {
-      // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      //
-      // final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-      //
-      // final credential = GoogleAuthProvider.credential(
-      //   accessToken: googleAuth?.accessToken,
-      //   idToken: googleAuth?.idToken,
-      // );
-      //
-      // await FirebaseAuth.instance.signInWithCredential(credential);
-      // if (mounted) {
-      //   Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
-      // }
+// void formFiledSubmitted() async {
+//   try {
+//     final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+//       email: _emailController.text,
+//       password: _passwordController.text,
+//     );
+//     if (mounted) {
+//       Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
+//     }
+//   } catch (e) {
+//     showDialog(context: context, builder: (context) => const AlertDialog());
+//   }
+// }
 
-      // Only UI:
-      Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
-  }
+// Future<void> _loginWithGoogle() async {
+//   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+//
+//   final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+//
+//   final credential = GoogleAuthProvider.credential(
+//     accessToken: googleAuth?.accessToken,
+//     idToken: googleAuth?.idToken,
+//   );
+//
+//   try {
+//     final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+//     if (mounted) {
+//       Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
+//     }
+//   } catch (e) {
+//     print(e);
+//   }
+
+// Only UI:
+// Navigator.of(context).pushReplacementNamed(AppConfig.homePage);
+// }
 }

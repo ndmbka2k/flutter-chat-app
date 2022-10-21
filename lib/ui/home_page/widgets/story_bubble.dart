@@ -22,13 +22,13 @@ class StoryBubble extends StatelessWidget {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: Color(0xffF7F7Fc),
+              color: const Color(0xffF7F7Fc),
               borderRadius: BorderRadius.circular(AppSize.borderRadiusRounded),
             ),
             child: const Icon(FontAwesomeIcons.plus),
           ),
         ),
-        Text('Your Story'),
+        const Text('Your Story'),
       ],
     );
   }

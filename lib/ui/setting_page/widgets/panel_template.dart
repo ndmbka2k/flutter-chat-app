@@ -19,8 +19,8 @@ class PanelTemplate extends StatelessWidget {
         Expanded(
           child: Text(title),
         ),
-        Gap(8),
-        Icon(FontAwesomeIcons.chevronRight),
+        const Gap(8),
+        const Icon(FontAwesomeIcons.chevronRight),
       ],
     );
   }
